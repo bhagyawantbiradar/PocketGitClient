@@ -11,6 +11,9 @@ android {
         versionCode buildConfig.version.code
         versionName buildConfig.version.name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "PGC_GITHUB_CLIENT_ID", '\"' + getClientId() + '\"'
+        buildConfigField "String", "PGC_GITHUB_SECRET_KEY", '\"' + getClientSecretKey() + '\"'
+        buildConfigField "String", "PGC_GITHUB_AUTHORIZATION_CALLBACK_URL", '\"' + getAuthorizationCallBackUrl() + '\"'
     }
     buildTypes {
         release {
@@ -27,5 +30,17 @@ dependencies {
     implementation deps.androidx.core
     implementation deps.androidx.constraintLayout
     implementation deps.junit
+}
+
+def getClientId() {
+    return hasProperty('PGC_GITHUB_CLIENT_ID') ? PGC_GITHUB_CLIENT_ID : System.getenv("PGC_GITHUB_CLIENT_ID")
+}
+
+def getClientSecretKey() {
+    return hasProperty('PGC_GITHUB_CLIENT_SECRET_KEY') ? PGC_GITHUB_CLIENT_SECRET_KEY : System.getenv("PGC_GITHUB_CLIENT_SECRET_KEY")
+}
+
+def getAuthorizationCallBackUrl() {
+    return hasProperty('PGC_GITHUB_AUTHORIZATION_CALLBACK_URL') ? PGC_GITHUB_AUTHORIZATION_CALLBACK_URL : System.getenv("PGC_GITHUB_AUTHORIZATION_CALLBACK_URL")
 }
 

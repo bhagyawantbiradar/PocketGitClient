@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pocket Git Client</string>
+    <string name="log_in_with_github">Log In with GitHub</string>
 </resources>
