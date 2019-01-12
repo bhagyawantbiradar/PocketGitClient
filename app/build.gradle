@@ -29,6 +29,7 @@ dependencies {
     implementation deps.androidx.appCompat
     implementation deps.androidx.core
     implementation deps.androidx.constraintLayout
+    implementation deps.androidx.lifecycle
     implementation deps.junit
 }
 
