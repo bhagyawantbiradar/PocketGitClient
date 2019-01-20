@@ -1,4 +1,4 @@
-# PocketGitClient
+# PocketGitClient [![Build Status](https://travis-ci.org/Sathawale27/PocketGitClient.svg?branch=master)](https://travis-ci.org/Sathawale27/PocketGitClient)
 PocketGitClient is a simple android GitHub Client application.
 This application will let you access all the features of Github directly from your Android device.
 

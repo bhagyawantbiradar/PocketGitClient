@@ -21,3 +21,7 @@ env:
 
 script:
   - "./gradlew clean build"
+
+install:
+    - echo yes | sdkmanager "platforms;android-28"
+    - echo yes | sdkmanager "build-tools;27.0.3"
