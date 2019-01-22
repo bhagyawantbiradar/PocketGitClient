@@ -1,0 +1,34 @@
+language: android
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+before_install:
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - chmod +x gradlew
+  - ./gradlew dependencies || true
+
+env:
+  global:
+    - secure: "G3yfNHHYIKImpOJ7FHvnwAomEfybtofm8PyTcTwJ+U09fDm/LBgIwrgjxlNSNW5ofKpgR9RUxTHTorU/xQX33m9P6cZh8VMLqSEUInl0wVzNiSRFAD2f43+b5NOG36dBA09zIIrn11sEMcCNcvE9bEYcL0NlJ3gr3LStZxitQMBlwlI0TLK4Ex3AIvVGuiCdZ4K8mjkmEgf+7/QBy23F8tX+NDFR7oWCHQci71Qzo85yQy50qxlxOH3GuzKN80OjkLcv6aroqZiT4g/ShiE6zgd9xWCTElrbPfGlTzJeuccoiAIrBW21/Q7JkGgKufBPX77sqy+jwtbG9vMC07+R+GvAWs1Bcv9oPdgsTbsPgC0nBrpAnWozki2hmfFsLPO7dt9G1yWDJ2T1/5MDrNubzcMmGE6J74VSTzXrEvtal9Jv4jN+WsLBer6/2FRI6B0wHdf1X/U0Pz/gfpvsXU0N4DZ6PrU38Vj+87raj7OBG0VmnMKF0S7+GIuTvpkH2AZ/FoMHsDPKvXhSU3lMbE4tUSiCiLH0YaaAAtsdZxDtF1Ts/PhFXLg003wc6N5SV4DvvNXzzHZqaoQddxqWECpTn70qRZb5j3QPEUlOyiWMP+/HtLA4hhwDgc3XIjUMP1EpMfFu8gh25tmnK+Br69O3mPgR50LaF5M1RwyXwVrzPw0="
+    - secure: "s3SIgozppnn9KhVey7BCzAaEuaVlgeqfXcgtzbLwygYXgvEmOBG5qmTVZ/zNyZYBwbsVYFfmGKfBazhmReA+yxCAPjQe3loc+ycC4s6E7JrytY2L6uIo2jTkU4K6jicuTSk10KAnbO95Pcwcv7Gn0C5zTPaS/z9SisiVUK/u31owqJxeZ2/iOBHE82ygmaSYaCun+eEXUADaBzJLWB7lB+iJRRGO6veF/Yr4vaKGBGD8gMVABEYVEPOAJJJeqO6loXpf+cssIjb4XBg52/Vyi54P9BuOSxbvTJrAsxNo89fWzq5lz4WJSB0BJNLlmF5q1SaOaTvuTnza1npdHDQHNgUVShI760IoGFTK8RQ+fN33ta/pslL2nrpHsV7L7R468gRKPV/5l7KCevc0s/woFOoxqTxTbngWsrD8K8pShyPb94FLfhojNaqvhyTQjFR0TUOZHX6GkeSw9Y8OlpZB56b6B95amdU2Rgdr6SD/6buAuJXGE7jmyfqj1odU889Ts3hQZkmxYqTNvyVAy6+yCS/OMShCdD/Yd8W+y7Vnd/6XCohAGC5Ce9+Y3dLF1jQD8PUN5/Gvrx272hEv+E6aHwNw7Gi9umpA7J2DqFITKZ3hEnjzRzQxmj9HRBLp67PJVmfwizxieVGv/kHC5frmUnEps4qof3xGz30mquZLWt4="
+    - secure: "C85EKPYgRYs2R3eOm/2/+wUjYF3/I6QbaAC4jH6P6ueByeb3C6GLaQMm0zJr/11Khm55A/6Zf15Xad4daW5bZJE6MW/IdJDFDuiNqgvAN7Y2PeVJ14ScL8QPqyS+/DJbi9HvwMWDHbxekTFMEhvBbZHkMEDvnspoHGZ1nYiafliiot65Unt1dOmMG5nYhgyuoQVjs6u4c1TKaK9ALQhA4tbfV2LkMn1L4VnDy9SAz6AKuW+DO+t7Id7U9kjjIdYMDvKqvBADk/Ygk7x6B6PqFqTBBG/pCgpunT9cosEbDm6B+3RmMzhIeAe0Eom0PuEiXfrDYXc2iUXRIzbb/C1vOJ298u9EFY4gY2gRQp71kLc+bdYN6dCkOVSxXk6YYiE7TuSriUdsTxhg8POv43sKERdw4rI9t+lFRDGalwlLdz0uExCtdaMQRBzlc2DQ+94sulqFfhTeFyO7n05JcvXXNCuKVJ/YI3eMLw+7jobysI8XR3+H0g5RdMKmDwZ5aH/5oGo4HO2uww/TRttYOQTLxn39MsaoyTT+yoOzMnl2wqzx0QjXaTFiNXFnyvNmt0p6S02Azz8IbCd3J7FZVMOvhhXf5Qg6R3zwcWiYjr9cyPCovpmcEhZTF5g0SPEkib+2MrriSsVhsrjGipN+k0B6ZTg5NcRBSIldyIP2ZbyRjXE="
+
+script:
+  - "./gradlew clean build"
+
+install:
+    - echo yes | sdkmanager "platforms;android-28"
+    - echo yes | sdkmanager "build-tools;27.0.3"
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
